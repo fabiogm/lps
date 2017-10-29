@@ -1,6 +1,6 @@
 ---
 title: "Urban Accidents in the City of Porto Alegre"
-author: "Jean-Marc Vincent, Lucas Mello Schnorr"
+author: "Fábio Gabriel de Magalhães"
 date: "October 2017"
 output:
   pdf_document:
@@ -9,36 +9,97 @@ output:
 geometry: margin=1.5in, top=0.5in, bottom=0.5in
 ---
 
-Each student should provide a Rmd file with _two_ to _four_ plots, with text describing the semantics of the data, the question, how they have answered the question, and an explanation for each figure, showing how that particular figure helps the answering of the initial question.  Fork the LPS repository in GitHub, push your Rmd solution there. Send us, by e-mail, the link for your GIT repository, indicating the PATH to the Rmd file. Check the LPS website for the deadline.
+```{r, echo=F, message=F}
+# Import all needed packages here and avoid undesirable warning messages.
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(magrittr)
+```
 
 # Introduction
 
-The City of Porto Alegre, under the transparency law, has provided a data set with all the urban accidents (within the city limits) since 2000. The data set, including a description of each column in the PDF file format, is available in the following website:
+Under the transparancy law the city of Porto Alegre has provided a data set with all the urban accidents within its city limits since 2000[1]. In this short note we are interested in the analysis of data for the year of 2001. More specifically we are interested in knowing if weekends impact the number of accidents.
 
-http://www.datapoa.com.br/dataset/acidentes-de-transito
+As on weekends there are much less cars in the streets our hypothesis is that there are less accidents on weekends. We will be providing an exploratory data analysis. More rigorous analysis is reserved for future works. 
 
-# Goal
+```{r, echo=F, message=F}
+filename <- "acidentes-2001.csv"
+location <- paste("http://www.opendatapoa.com.br/storage/f/2013-11-06T17%3A30%3A42.711Z", 
+                  filename, sep="/")
 
-For a given year (defined by the LPS coordination for each student enrolled in the cursus), the goal is to answer one of the following questions. The solution must use the data import and manipulation verbs of the R programming language and the tidyverse metapackage (readr, tidyr, dplyr) using Literate Programming.
+if (!file.exists(filename)) {
+  download.file(location, destfile=filename, quiet=F)
+}
 
-# Questions
-
-1. What is the time of the day with most accidents?
-2. How many vehicles are involved in the accidents?
-3. What types of accidents are more common?
-4. Is the number of deaths increasing or decreasing?
-5. Is there a street of the city with more accidents than others?
-6. Do holidays impact in the number of accidents?
-
-# Download the data
-
-Supposing you have the URL for the CSV file, you can read the data using the code below. You can also download it manually and commit it to your repository to avoid an internet connection every time you knit this file. If the URL changes, the second solution might even make your analysis be more portable in time.
-
-```{r}
-library(readr)
-URL <- "http://www.opendatapoa.com.br/storage/f/2013-11-06T17%3A26%3A29.293Z/acidentes-2000.csv"
-df <- read_delim(URL, delim=";")
-df
+df <- read_delim(filename, delim=";")
+df <- as.data.frame(df)
 ```
 
+The data set is composed of `r dim(df)[1]` observations of `r dim(df)[2]` variables, where each row represents an accident. Among the variables there are the date of the accident, location, number of deaths occasioned, number of injured people and types of vehicles involved. In this analysis we will be using just the count of accidents, implicitly defined by the number of rows for a particular date or week day.
 
+# Exploratory Data Analysis
+
+Data is already in a tidy format but some preprocessing is needed to generate more informative graphics. First we create a new column for holding English weekdays and reorder its factor levels to show them in natural order (i.e. starting from Sunday up to Saturday) and not in lexicographical order. As the time of the accident is not relevant we create a new column holding the date, what will be useful to our analysis.
+
+```{r}
+weekDays <- c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", 
+              "Friday", "Saturday")
+df <- df %>% mutate(weekDay=weekdays(DATA_HORA)) %>% 
+  mutate(weekDay=factor(weekDay, weekDays), date=as.Date(DATA_HORA))
+```
+
+Data seems representative as the earliest date recorded is the first day of the year and the latest date recorded is the last day of the year.
+
+```{r}
+(earliestDate <- as.Date(min(df$DATA_HORA)))
+(latestDate <- as.Date(max(df$DATA_HORA)))
+(nDays <- as.numeric(latestDate - earliestDate + 1))
+```
+
+Procceeding with the plot we notice that there is a lower number of total accidents happening on weekends
+
+```{r, fig.cap="Histogram of the number of accidents"}
+
+
+ggplot(data=df) + geom_bar(mapping = aes(x=weekDay)) +
+  labs(title="Number of accidents by day of the week",
+       x="Day of the week", y="Number of accidents")
+```
+
+Inspecting Figure 1 it is possible to see an aparent decrease in the total number of accidents on weekends. We now inspect the difference from the mean number of accidents `r nrow(df) / nDays`.
+
+```{r}
+(dfStats <- df %>% 
+   group_by(weekDay) %>% 
+   summarize(totalAccidents=n(), meanAccidents=n() / 52))
+```
+
+The table above shows the mean number of accidents per weekday. It is interesting to note how those differ from the entire sample mean number of accidents, `r nrow(df)/nDays`. Note that in the computation above we are ignoring the fact that there are 53 Mondays in the recorded span, while there are 52 of the remaining week days. That is because the recording starts and ends on a Monday.
+
+```{r, fig.cap="Number of accidents per day"}
+dfStats2 <- df %>%
+   group_by(date, weekDay) %>% 
+   summarize(totalAccidents=n())
+
+ggplot(dfStats2, aes(weekDay, totalAccidents)) + 
+  geom_boxplot() +
+  labs(title="Number of daily accidents by day of the week",
+       x="Day of the week", y="Number of accidents") 
+```
+
+Once more we have a visual indication that less accidents happen on Saturdays and Sundays. In Figure 2 it is possible to notice that the mean values for Saturdays and Sundays are lower than all other mean values, as well as the quartiles for those two days are lower.
+
+# Conclusions and Future Work
+
+We observed that there are less accidents on weekends. In order to establish whether this difference is significant or not we should use rigorous statistics, testing the difference in means and possibly modeling data with Poisson models as those are suitable for count data[2].
+
+The more data we analyze the more confident we can be in our hypothesis. Hence we shoudn't restrict our analysis to one particular year, but analyze the whole data set instead. Having more years also allows us to check the representativity of the samples (year worth of data).
+
+# References
+
+[1] "Acidentes De Trânsito." Portal de Dados Abertos da Cidade de Porto Alegre, www.datapoa.com.br/dataset/acidentes-de-transito.
+
+[2] P. Dalgaard, _"Introductory Statistics with R"_. Springer, 2008.
+
+[3] H. Wickham and G. Grolemund, _"R for Data Science"_. O'Reilly, 2016.

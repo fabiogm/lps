@@ -33,38 +33,125 @@ be backed up with practical sessions and worked out examples.
 
 ** Content
 
-1. General Introduction
+1. (First Session) General Introduction
    - [[./slides/0_Introduction.org][Course overview, goals, references]] ([[./slides/0_Introduction.pdf][PDF]])
    - [[./slides/0_Motivation.org][Motivation for a Rigourous Analysis]] ([[./slides/0_Motivation.pdf][PDF]])
-2. Literate Programming - Literate Programming Motivation & RStudio Case Study
+2. (First Session) Literate Programming - Literate Programming Motivation & RStudio Case Study 
    - Reproducibility and Literate Programming ([[./slides/0_Reproducibility.pdf][PDF]])
    - Why R? RStudio. ([[./slides/0_WhyR.pdf][PDF]])
    - Hands-on: Using RStudio for running a Statistical Analysis
      - [[./handson/0_TD.Rmd][Given Example Analysis]]
      - Data set #1: ping-pong measurements
      - Data set #2: iteration duration of a geophysics application
-3. Data Carpentry and Manipulation - Clean-up data, and using the dplyr R package
-   - Introduction & Data Characterization
+3. (Second Session) Data Carpentry and Manipulation - Clean-up data, and using the dplyr R package 
+   - Introduction & Data Characterization ([[./slides/1_Data-Characterization.pdf][PDF]])
    - [[./slides/1_Tidy_Data.org][Tidy Data]] ([[./slides/1_Tidy_Data.pdf][PDF]])
    - [[./slides/1_Data_Manipulation.org][Data Manipulation Workflow]] (groups, summarize) ([[./slides/1_Data_Manipulation.pdf][PDF]]) + [[./handson/1_TD.Rmd][Example]]
    - Hands-on: [[./handson/1_TD_Names.Rmd][Given names in France - 2016 Edition]]
    - Mid-term activity (Deadline: Saturday 28/10 at 23:59)
      - [[./tasks/1_POA_Urban_Accidents.Rmd][Analysis of Urban Accidents in the City of Porto Alegre]]
-4. Data Representation - Checklist for good graphics & the ggplot2 package
-   - Data Quality
-5. Probability / Statistics - an Introduction to Statistics and Probalistic Modeling
+       |----+------------|
+       |  N | *Solutions*  |
+       |----+------------|
+       |  1 | [[https://github.com/EduardoVernier/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Eduardo]]    |
+       |  2 | [[https://github.com/mmsouza/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Matheus]]    |
+       |  3 | [[https://github.com/lizalemos/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Liza]]       |
+       |  4 | [[https://github.com/lacbeltran/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Lizeth]]     |
+       |  5 | [[https://bitbucket.org/ediazc/lps/raw/8c20392fe0c6ab14a4276259cdddd3a6e11f0960/tasks/1_POA_Urban_Accidents.Rmd][Emmanuell]]  |
+       |  6 | [[https://github.com/fabiogm/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Fábio]]      |
+       |  7 | [[https://github.com/soares-f/lps/blob/assignments/tasks/Report_year2003.Rmd][Felipe]]     |
+       |  8 | [[https://github.com/rodrimoni/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Rodrigo]]    |
+       |  9 | [[https://github.com/lbassis/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Lucas]]      |
+       | 10 | [[https://github.com/rodrigofranzoi/lps/blob/master/tasks/1_POA_Urban_Accidents.Rmd][Rodrigo F.]] |
+       | 11 | [[./tasks/solutions/Gabrielli.Rmd][Gabrielli]]  |
+       |----+------------|
+4. (Third Session) Data Quality, Descriptive Statistics 
+   - Discussion about POA accidents
+   - [[./slides/Data-Quality/2_Data-Quality.pdf][Data quality (criteria) Missing Data]]
+   - [[./slides/Data-Control/2_Data-Control.pdf][Descriptive Statistics : central tendency, variability]]
+   - _Critical Analysis of a Plot_ (Homework): Choose a plot that has
+     been published in the Internet, News site, anywhere. Then, in a
+     Rmd file, provide a critical analysis about it. Put in your Git
+     repository and send us the link by e-mail, OR send us the Rmd
+     file directly by e-mail.
+     |----+------------|
+     |  N | Solutions  |
+     |----+------------|
+     |  1 | [[https://github.com/rodrigofranzoi/lps/blob/master/tasks/Data%20Quality/DataQuality.Rmd][Rodrigo F.]] |
+     |  2 | [[https://github.com/lacbeltran/lps/blob/master/tasks/Lizeth_Critical_Analysis_Of_A_Plot.Rmd][Lizeth]]     |
+     |  3 | [[https://bitbucket.org/ediazc/lps/src/master/tasks/Critical_Analysis_of_a_Plot.Rmd][Emmanuell]]  |
+     |  4 | [[https://github.com/lbassis/lps/blob/master/tasks/Elections_Survey.Rmd][Lucas]]      |
+     |  5 | [[./tasks/solutions/Liza.Rmd][Liza]]       |
+     |  6 | [[./tasks/solutions/Gabrielli_T2.Rmd][Gabrielli]]  |
+     |  7 | [[https://github.com/mmsouza/lps/blob/master/tasks/News%20analysis.Rmd][Matheus]]    |
+     |  8 | [[https://github.com/soares-f/lps/blob/assignments/tasks/Comments_Plot.Rmd][Felipe]]     |
+     |  9 | [[https://github.com/rodrimoni/lps/blob/master/tasks/Critical%20Analysis%20of%20a%20Plot.Rmd][Rodrigo]]    |
+     | 10 | [[https://github.com/EduardoVernier/lps/blob/master/tasks/2.md][Eduardo]]    |
+     |----+------------|
+
+5. (Fourth Session) Data Visualization
+   - Discussion about last homework (critical plot analysis)
+   - [[./slides/Check-list-good-graphics-en.pdf][Checklist for good graphics]] ([[./slides/Check-list-good-graphics-tableau-en.pdf][Table]])
+   - [[./slides/5_Data_Viz.org][Data Viz with the ggplot2 package]]
+   - [[./slides/3_introduction_to_statistics.pdf][Probabilistic Modeling]]
+     - Law of large numbers, Central Limit Theorem (CLT)
+   - [[./slides/lecture_data_presentation.pdf][Presentation of Scientific Results]]
+   - _Improve the POA Accidents Dataset plots_ (Homework): Get back to
+     the mid-term activity and improve/create your own plots using the
+     checklist for good graphics presented today.
+     |---+----------------------|
+     | N | Solutions            |
+     |---+----------------------|
+     | 1 | [[https://github.com/EduardoVernier/lps/blob/master/tasks/3.Rmd][Eduardo]] ([[https://github.com/EduardoVernier/lps/blob/master/tasks/3.pdf][PDF]])        |
+     | 2 | [[https://github.com/lbassis/lps/blob/master/tasks/1_POA_Urban_Accidents%202.0.Rmd][Lucas]]                |
+     | 3 | [[https://github.com/soares-f/lps/blob/assignments/tasks/GG_Plot.Rmd][Felipe]]               |
+     | 4 | [[https://github.com/rodrigofranzoi/lps/blob/master/tasks/LoteriasData/LoteriasAnalysis.Rmd][Rodrigo S.]] (Loteria) |
+     | 5 | [[https://bitbucket.org/ediazc/lps/src/master/tasks/Critical_Analysis_of_Accidents_Plot.Rmd][Emmanuell]] ([[https://bitbucket.org/ediazc/lps/src/master/tasks/Critical_Analysis_of_Accidents_Plot.pdf][PDF]])      |
+     |---+----------------------|
+
+6. (Fifth Session) Statistics
+   - Duke of Tuscany Problem
+     - *Model*: The sum of 3 dice is modeled by a random variable with
+       values in [3, .., 18] and probabilities P_3, ..., P_18.
+     - *Question*: Is P_9 < P_10?
+     - *Method*: Estimation of P_9 and P_10, fix a level of
+       confidence. Decide P_9 < P_10 if ... (under which condition?)
+   - [[./handson/Duke-and-Galileo.Rmd][Analysis of the Duke of Tuscany]]
+   - [[./handson/Stick.Rmd][Stick Breaking Problem]]
+   - [[./slides/6_Estimation/Estimation-intro.pdf][Estimators - how to get information from samples]]
+     - Handson: [[./handson/Estimation-example.Rmd][Estimation Example]]
 
 ** Schedule
 
-|-----+-------------------+--------------------+------------+--------|
-| Day | Date              | Hour               | Room       | Topics |
-|-----+-------------------+--------------------+------------+--------|
-|   0 | 24/10 (Tuesday)   | 8:30 -- 10:30 (2h) | Lab 67-104 |  1 e 2 |
-|   1 | 25/10 (Wednesday) | 8:30 -- 10:30 (2h) | Lab 67-104 |  2 e 3 |
-|   2 | 30/10 (Monday)    | 8:30 -- 10:30 (2h) | Lab 67-104 |      4 |
-|   3 | 31/10 (Tuesday)   | 8:30 -- 12:30 (4h) | Lab 67-103 |      5 |
-|   4 | 01/11 (Wednesday) | 8:30 -- 12:30 (4h) | AUD-1      |      5 |
-|-----+-------------------+--------------------+------------+--------|
+|-----+-------------------+--------------------+--------------------|
+| Day | Date              | Hour               | Room               |
+|-----+-------------------+--------------------+--------------------|
+|   0 | 24/10 (Tuesday)   | 8:30 -- 10:30 (2h) | Lab 67-104         |
+|   1 | 25/10 (Wednesday) | 8:30 -- 10:30 (2h) | Lab 67-104         |
+|   2 | 30/10 (Monday)    | 8:30 -- 10:30 (2h) | Lab 67-104         |
+|   3 | 31/10 (Tuesday)   | 8:30 -- 12:30 (4h) | Lab 67-103         |
+|   4 | 01/11 (Wednesday) | 8:30 -- 12:30 (4h) | Lab 67-103 / AUD-1 |
+|-----+-------------------+--------------------+--------------------|
+
+** Final project
+
+The deadline for the final project is the 15th of December, 2017.
+
+|------------+---------------------------------------------+----|
+| Student    | Dataset                                     |    |
+|------------+---------------------------------------------+----|
+| Eduardo    | [[https://www.kaggle.com/rojour/boston-results][Boston Marathon 2017]]                        | ok |
+| Liza       | [[https://www.kaggle.com/jyzaguirre/us-homicide-reports/data][US Homicides]]                                | ok |
+| Fábio      | [[http://www.datapoa.com.br/dataset/acidentes-de-transito][Porto Alegre accidents]]                      | ok |
+| Gabrielli  | [[https://www.kaggle.com/nasirmeh/prediction-of-rainfall/][Rainfall in India]]                           | ok |
+| Felipe     | [[http://archive.ics.uci.edu/ml/datasets/online+retail][Online Retail Sales in Europe]]               | ok |
+| Rodrigo F. | [[https://www.kaggle.com/jyzaguirre/us-homicide-reports/data][US Homicides]]                                | ok |
+| Lucas      | [[https://www.kaggle.com/open-source-sports/professional-hockey-database/data][Professional Hockey]]                         | ok |
+| Matheus    | [[http://dados.rs.gov.br/dataset/fee-indicadores-criminais-homicidio-doloso-103597][RS Homicide]]                                 | ok |
+| Rodrigo N. | [[https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings][Video Game Sales]]                            | ok |
+| Lizeth     | [[https://www.kaggle.com/unsdsn/world-happiness/data][World Happiness]]                             | ok |
+| Emmanuell  | [[https://www.kaggle.com/worldbank/world-development-indicators][Land usage and Agriculture]] & [[https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data][Climate change]] | ok |
+|------------+---------------------------------------------+----|
 
 ** References
 
